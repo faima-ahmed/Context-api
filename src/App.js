@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Users from './Components/Users';
 import NewUser from './Components/NewUser';
+import { UsersContext } from './context/UsersContext';
 
 
 function App(props) {
@@ -15,11 +16,15 @@ function App(props) {
       setUsers(filterUsers);             
   }
 
+  const handleAddNewUser= (newUser)=>{
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  }
+
   return (
-    <div>
-      <NewUser/>
-      <Users users={users} handleDeleteUser={handleDeleteUser}/>
-    </div>
+    <UsersContext.Provider value={{users, setUsers}}>
+      <NewUser handleAddNewUser={handleAddNewUser}/>
+      <Users handleDeleteUser={handleDeleteUser}/>
+    </UsersContext.Provider>
   );
 }
 

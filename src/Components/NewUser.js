@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const NewUser = () => {
+const NewUser = ({handleAddNewUser}) => {
+    const [username, setUsername]= useState('');
+
+    const handleUserNameChange=(event)=>{
+        setUsername(event.target.value);
+    }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        
+        
+        const newUser={id: new Date().getTime().toString(), username:username};
+        handleAddNewUser(newUser);
+        setUsername('');
+    }
+
     return (
         <div>
             <h2>User Registration</h2>
-            <form>
-                <input type='text' name='username' />
+            <form onSubmit={handleSubmit}>
+                <input type='text' name='username' value={username} onChange={handleUserNameChange} required/>
                 <button type='submit' >Add User</button>
             </form>
         </div>
