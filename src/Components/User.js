@@ -1,10 +1,10 @@
 import React from 'react';
 
-const User = ({user, handleDeleteUser}) => {
+const User = ({user}) => {
     const {id, username}= user;
 
     const handleDelete=(id) => {
-        handleDeleteUser(id);
+        
     }
 
     return (
